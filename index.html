@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus AI | Soluciones de Inteligencia Artificial para Empresas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0c10;
+      --bg-card: #121621;
+      --bg-input: #1b2130;
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --accent: #a855f7;
+      --accent-cyan: #06b6d4;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border: #232d42;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Gradient Background Effect */
+    .glow-bg {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(168, 85, 247, 0.1) 50%, rgba(0,0,0,0) 70%);
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(10, 12, 16, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 1rem 2rem;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .btn {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 6rem 0 4rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .tag {
+      background: rgba(99, 102, 241, 0.15);
+      color: #818cf8;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #a855f7, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 4rem;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      text-align: center;
+    }
+
+    .stat-card h3 {
+      font-size: 2.25rem;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    /* Services Section */
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: var(--radius);
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+    }
+
+    .service-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(99, 102, 241, 0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .service-card h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1.25rem;
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Calculator Section */
+    .calculator-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .slider-group {
+      margin-bottom: 1.75rem;
+    }
+
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .slider-label span:nth-child(2) {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--primary);
+      height: 6px;
+      background: var(--bg-input);
+      border-radius: 5px;
+      outline: none;
+    }
+
+    .result-card {
+      background: linear-gradient(145deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 2rem;
+      border-radius: var(--radius);
+      text-align: center;
+    }
+
+    .result-card h4 {
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .result-card .big-number {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      margin-bottom: 1rem;
+    }
+
+    /* Contact Section */
+    .contact-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      border-radius: var(--radius);
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--primary);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .calculator-box { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-bg"></div>
+
+  <!-- Header -->
+  <header>
+    <nav>
+      <a href="#" class="logo">⚡ NexusAI</a>
+      <ul class="nav-links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#calculadora">Calcular Ahorro</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a href="#contacto" class="btn">Empezar Ahora</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero container">
+    <span class="tag">🤖 Automatización & Inteligencia Artificial</span>
+    <h1>Transforma tu Empresa con <br><span>Soluciones de IA a Medida</span></h1>
+    <p>Aumenta la productividad de tu equipo un 80%, automatiza procesos repetitivos y escala tu negocio sin aumentar los costes operativos.</p>
+    <a href="#contacto" class="btn">Reservar Auditoría Gratuita</a>
+
+    <div class="stats">
+      <div class="stat-card">
+        <h3>+85%</h3>
+        <p>Ahorro de Tiempo</p>
+      </div>
+      <div class="stat-card">
+        <h3>24/7</h3>
+        <p>Operatividad Continuada</p>
+      </div>
+      <div class="stat-card">
+        <h3>10x</h3>
+        <p>Retorno de Inversión</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="section container">
+    <div class="section-title">
+      <h2>Nuestros Servicios de IA</h2>
+      <p>Diseñamos e implementamos tecnología de vanguardia para tu negocio</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">💬</div>
+        <h3>Agentes de Atencion Virtual</h3>
+        <p>Chatbots inteligentes capacitados con tus documentos de empresa para atender clientes y prospectos al instante.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>Automatizacion No-Code</h3>
+        <p>Conectamos tus aplicaciones (CRM, Email, Hojas de cálculo) mediante Make y Zapier para eliminar tareas manuales.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📝</div>
+        <h3>Generacion de Contenido</h3>
+        <p>Sistemas automatizados para redactar artículos, publicaciones en redes sociales y correos comerciales con la voz de tu marca.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>Analitica Predictiva</h3>
+        <p>Modelos de datos para anticipar tendencias de ventas, comportamiento de clientes y optimizar inventarios.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculadora ROI -->
+  <section id="calculadora" class="section container">
+    <div class="section-title">
+      <h2>Calcula tu Ahorro Estimado</h2>
+      <p>Descubre cuánto dinero y tiempo puede ahorrar tu negocio implementando automatizaciones</p>
+    </div>
+
+    <div class="calculator-box">
+      <div>
+        <div class="slider-group">
+          <div class="slider-label">
+            <span>Número de Empleados:</span>
+            <span id="empVal">5</span>
+          </div>
+          <input type="range" id="employees" min="1" max="50" value="5" oninput="calculateROI()">
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-label">
+            <span>Horas rutinarias/semana por persona:</span>
+            <span id="hoursVal">10 hrs</span>
+          </div>
+          <input type="range" id="hours" min="2" max="30" value="10" oninput="calculateROI()">
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-label">
+            <span>Coste promedio hora (€):</span>
+            <span id="costVal">20 €</span>
+          </div>
+          <input type="range" id="cost" min="10" max="100" value="20" oninput="calculateROI()">
+        </div>
+      </div>
+
+      <div class="result-card">
+        <h4>Ahorro Anual Estimado</h4>
+        <div class="big-number" id="savingsResult">31,200 €</div>
+        <p id="hoursSavedResult">Ahorrarías aproximadamente 1,560 horas de trabajo repetitivo al año.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="section container">
+    <div class="section-title">
+      <h2>Impulsa tu Negocio Hoy</h2>
+      <p>Déjanos tus datos y te contactaremos para realizar una auditoría de procesos totalmente gratuita.</p>
+    </div>
+
+    <div class="contact-container">
+      <form id="contactForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label for="name">Nombre Completo</label>
+          <input type="text" id="name" required placeholder="Ej. Juan Pérez">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo Electrónico</label>
+          <input type="email" id="email" required placeholder="juan@tuempresa.com">
+        </div>
+
+        <div class="form-group">
+          <label for="service">Servicio de Interés</label>
+          <select id="service">
+            <option value="Agentes IA">Agentes & Chatbots IA</option>
+            <option value="Automatización">Automatización de Procesos</option>
+            <option value="Consultoría">Consultoría General</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Mensaje o Detalle del Proyecto</label>
+          <textarea id="message" rows="4" placeholder="Cuéntanos brevemente sobre tu negocio..."></textarea>
+        </div>
+
+        <button type="submit" class="btn" style="width: 100%; justify-content: center;">Enviar Solicitud</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 NexusAI Solutions. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Lógica Calculadora ROI
+    function calculateROI() {
+      const employees = parseInt(document.getElementById('employees').value);
+      const hours = parseInt(document.getElementById('hours').value);
+      const cost = parseInt(document.getElementById('cost').value);
+
+      document.getElementById('empVal').innerText = employees;
+      document.getElementById('hoursVal').innerText = hours + ' hrs';
+      document.getElementById('costVal').innerText = cost + ' €';
+
+      // Asumimos un 60% de eficiencia ganada en esas horas
+      const totalHoursSavedYear = Math.round(employees * hours * 52 * 0.6);
+      const moneySavedYear = Math.round(totalHoursSavedYear * cost);
+
+      document.getElementById('savingsResult').innerText = moneySavedYear.toLocaleString('es-ES') + ' €';
+      document.getElementById('hoursSavedResult').innerText = `Ahorrarías aproximadamente ${totalHoursSavedYear.toLocaleString('es-ES')} horas de trabajo al año.`;
+    }
+
+    // Lógica del Formulario
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      alert('¡Gracias por enviar tu mensaje! Nos pondremos en contacto contigo en menos de 24 horas.');
+      document.getElementById('contactForm').reset();
+    }
+  </script>
+</body>
+</html>
